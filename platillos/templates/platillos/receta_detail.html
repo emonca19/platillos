@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ receta.platillo.nombre }}</title>
+</head>
+<body>
+    <h1>{{ receta.platillo.nombre }}</h1>
+    
+    <p><strong>Tipo:</strong> {{ receta.platillo.tipo }} | <strong>Día:</strong> {{ receta.platillo.dia_semana }} | <strong>Precio:</strong> ${{ receta.platillo.precio }}</p>
+    
+    {% if receta.platillo.descripcion %}
+    <p><strong>Descripción:</strong> {{ receta.platillo.descripcion }}</p>
+    {% endif %}
+
+    <h3>Ingredientes:</h3>
+    <p>{{ receta.ingredientes }}</p>
+
+    <p>
+        <a href="{% url 'platillos:receta_edit' receta.pk %}">Editar</a> |
+        <a href="{% url 'platillos:lista_platillos' %}">Volver</a>
+    </p>
+</body>
+</html>

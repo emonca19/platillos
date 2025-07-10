@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ titulo }}</title>
+</head>
+<body>
+    <h1>{{ titulo }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <p>
+            <label>Ingredientes:</label><br>
+            {{ form.ingredientes }}
+        </p>
+
+        <p>
+            <input type="submit" value="Guardar">
+            <a href="{% url 'platillos:lista_platillos' %}">Cancelar</a>
+        </p>
+    </form>
+</body>
+</html>

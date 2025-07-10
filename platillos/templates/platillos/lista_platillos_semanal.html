@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Platillos</title>
+</head>
+<body>
+    <h1>Platillos Semanales</h1>
+    <p><a href="{% url 'platillos:platillo_new' %}">+ Nuevo Platillo</a></p>
+    
+    {% for dia in dias_laborales %}
+        <h3>{{ dia }}</h3>
+        {% for platillo in platillos_por_dia.items %}
+            {% if platillo.0 == dia %}
+                {% for p in platillo.1 %}
+                    <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;">
+                        <strong>{{ p.nombre }}</strong> ({{ p.get_tipo_display }}) - ${{ p.precio }}
+                        <br>
+                        <small>{{ p.descripcion }}</small>
+                        <br>
+                        <a href="{% url 'platillos:platillo_edit' p.pk %}">Editar</a> |
+                        <a href="{% url 'platillos:platillo_delete' p.pk %}">Eliminar</a> |
+                        {% if p.receta %}
+                            <a href="{% url 'platillos:receta_view' p.receta.pk %}">Ver Receta</a>
+                        {% else %}
+                            <a href="{% url 'platillos:receta_new' p.pk %}">Agregar Receta</a>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p><em>No hay platillos para este día</em></p>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</body>
+</html>
